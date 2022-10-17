@@ -4,7 +4,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
-
+//descryptor 는 인덱스!!
 int main(void) {
 	int fd;
 	mode_t mode;
