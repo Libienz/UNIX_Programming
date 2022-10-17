@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 	extern int optind;
 	int optcnt =0;	
 	int res;
-	char n;
+	int n;
 	int sum=0;
     	int mul=1;
 	int optstart;
