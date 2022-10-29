@@ -3,19 +3,19 @@
 #include <stdio.h>
 
 int main() {
-    struct utsname uts;
+	struct utsname uts;
 
-    if (uname(&uts) == -1) {
-	perror("uname");
-	exit(1);
-    }
+	if (uname(&uts) == -1) {
+		perror("uname");
+		exit(1);
+	}
 
-    printf("OSname : %s\n",uts.sysname);
-    printf("Nodename : %s\n",uts.nodename);
-    printf("Release : %s\n",uts.release);
-    printf("Version : %s\n",uts.version);
-    printf("Machine : %s\n",uts.machine);
+	printf("OSname: %s\n", uts.sysname);
+	printf("Nodename: %s\n", uts.nodename);
+	printf("Release: %s\n", uts.release);
+	printf("Version: %s\n", uts.version);
+	printf("Machine: %s\n", uts.machine);
 
-    return 0;
+	return 0;
 }
 
