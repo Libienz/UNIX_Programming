@@ -24,8 +24,8 @@ int main() {
     printf("** Move Directory Pointer **\n");
     readdir(dp);
     loc = telldir(dp);
-    seekdir(dp, loc); //옮겨가라 
-    printf("Cur Position : %ld\n", telldir(dp)); //하나의 엔트리를 옮겨가고 찍은 것
+    seekdir(dp, 10); //옮겨가라 
+    printf("after seek Cur Position : %ld\n", telldir(dp)); //하나의 엔트리를 옮겨가고 찍은 것
 
     dent = readdir(dp);
     printf("Read : %s \n", dent->d_name);
