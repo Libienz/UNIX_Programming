@@ -1,0 +1,6 @@
+vi source.c
+c source edit
+:wq
+gcc -o source source.c
+./source
+
