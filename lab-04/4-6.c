@@ -17,6 +17,26 @@ int main(void) {
     int ch;//getchar로 담아온 char 담을 변수 
     int wstatus;
     
+    while(!parent_done_flag); //부모가 끝날 때 까지 busy waiting
+    /*
+       부모 프로세스
+       fork 연산 전에 stdin 에서 읽어와 4-6.txt에 쓴다
+    */
+    
+    wfp = fopen("4-6.txt", "w");
+	
+    if (wfp == NULL) { //fopen 오류
+	perror("fopen: 4-6.txt");
+        exit(1);
+    }
+    //EOF 마주치기 전까지 getchar 이용 -> stdin으로 부터 읽어옴
+    printf("입력 시작\n");
+    while((ch=getchar())!= EOF) { 
+	putc(ch,wfp); //읽어온 것을 wfp에 쓴다 (4-6.txt)
+    }
+    fclose(wfp);
+
+
     
 
     if ((pid=fork()) < 0) { // fork 에러 
@@ -25,18 +45,24 @@ int main(void) {
     }
 
 
+    if (pid > 0) { //부모
+	//할일 다마쳐놓은 상태 자식 끝나기만 기다리면 됨
+	wait(&wstatus);
+	exit(0);
+    }
     /* 
        자식 프로세스
-       4-5.txt에서 읽어와
+       4-6.txt에서 읽어와
        stdout에 쓴다
     */
 
-    if (pid = 0) { //자식 프로세스
+    else { //자식 프로세스
 
-	while (!parent_done); //부모가 종료하지 않았다면 종료까지 무한 루프 
-	rfd = open("4-5.txt", O_RDONLY); 
+	//fork가 부모의 작업이 완료된 이후에 실행됨
+	//따로 부모의 종료 상태를 체크하거나 프로세스 간 통신 필요 없음 
+	rfd = open("4-6.txt", O_RDONLY); 
 	if (rfd == -1) { //open error
-	    perror("open 4-5.txt");
+	    perror("open 4-6.txt");
 	    exit(1);
 	}
 
@@ -49,25 +75,6 @@ int main(void) {
 	close(rfd);
     }
     
-    /*
-       부모 프로세스
-       stdin 에서 읽어와 4-5.txt에 쓴다
-    */
-    else  { //부모 프로세스
-        wfp = fopen("4-5.txt", "w");
-	
-	if (wfp == NULL) { //fopen 오류
-	    perror("fopen: 4-5.txt");
-	    exit(1);
-	}
-	//EOF 마주치기 전까지 getchar 이용 -> stdin으로 부터 읽어옴
-	printf("입력 시작\n");
-	while((ch=getchar())!= EOF) { 
-	    putc(ch,wfp); //읽어온 것을 wfp에 쓴다 (4-5.txt)
-	}
-	fclose(wfp);
-	exit(1);
-    }
 
 
 
