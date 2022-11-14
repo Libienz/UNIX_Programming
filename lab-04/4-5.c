@@ -66,7 +66,7 @@ int main(void) {
 	    putc(ch,wfp); //읽어온 것을 wfp에 쓴다 (4-5.txt)
 	}
 	fclose(wfp);
-	exit(1);
+	exit(0);
     }
 
 
