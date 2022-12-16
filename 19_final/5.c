@@ -32,7 +32,7 @@ int main(void) {
 	    close(1); //stdout 닫는다.
 	    dup(fd[1]); //파이프의 쓰기 기술자가 표준 출력의 역할을 한다.
 	    close(fd[0]); // 파이프의 읽기 기술자를 닫는다. 부모는 파이프에 쓴다.
-	    execlp("ls","ls","-l",(char *) NULL); //ls -l 수행, 표준 출력에 출력하겠지만 여기선 파이프로 들어간다. 
+	    execlp("ls", "ls","-l",(char *) NULL); //ls -l 수행, 표준 출력에 출력하겠지만 여기선 파이프로 들어간다. 
 	    wait(NULL);
 	    break;
     }
